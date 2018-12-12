@@ -39,7 +39,7 @@ export default class Http {
         Taro.hideNavigationBarLoading()
         switch (res.statusCode) {
           case 200:
-            return resolve(res.data.response)
+            return resolve(res.data)
           default:
             reject(new Error(res.data.msg))
         }

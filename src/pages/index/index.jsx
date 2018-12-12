@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import News from '../../components/news/index'
-import api from '../../services/api'
 import './index.less'
 
 export default class Index extends Component {
@@ -18,24 +17,19 @@ export default class Index extends Component {
   }
 
 
-  componentWillMount () {
+  componentWillMount() {
+
   }
 
-  componentDidMount () {
-    api.login({
-      id:1
-    }).then(res=>{
-      console.log('res',res)
-    }).catch(err=>{
-      console.log('err',err)
-    })
+  componentDidMount() {
+
   }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
   pressNews = (e) => {
     console.log(e)
@@ -47,8 +41,8 @@ export default class Index extends Component {
     })
   }
 
-  render () {
-    const { num,c } = this.state
+  render() {
+    const { num, c } = this.state
     const name = '小伙子'
     return (
       <View className='index'>

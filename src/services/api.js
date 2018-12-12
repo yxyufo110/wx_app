@@ -2,7 +2,9 @@ import Http from '../utils/http'
 
 const http = new Http()
 
-const login = (data) => http.post('/login', data)
+const authorization = (param) => http.get(`/user/authorization/${param}`)
 
-export default { login }
+const updateUserInfo = (param) => http.post('/user/updateUserInfo', param)
+
+export default { authorization,updateUserInfo }
 
