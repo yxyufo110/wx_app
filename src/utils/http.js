@@ -2,8 +2,6 @@ import Taro from '@tarojs/taro'
 import apiConfig from './apiConfig'
 
 
-// 后端是否支持json格式
-// const contentType = 'application/x-www-form-urlencoded'
 const contentType = 'application/json'
 
 export default class Http {

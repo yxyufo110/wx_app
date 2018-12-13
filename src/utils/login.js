@@ -3,6 +3,7 @@ import api from '../../services/api'
 
 export default class Login {
   login() {
+    // 待处理
     Taro.login().then(res=>{
       console.log('res',res)
       api.authorization(res.code).then(r=>{
