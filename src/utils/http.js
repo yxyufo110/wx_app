@@ -4,7 +4,7 @@ import apiConfig from './apiConfig'
 
 const contentType = 'application/json'
 
-export default class Http {
+ class Http {
 
   get(url, data) {
     return this.commonHttp('GET', url, data)
@@ -25,13 +25,15 @@ export default class Http {
   async commonHttp(method, url, data) {
     return new Promise(async (resolve, reject) => {
       Taro.showNavigationBarLoading()
+      const token = Taro.getStorageSync('token')
       try {
         const res = await Taro.request({
           url: `${apiConfig.baseUrl}${url}`,
           method,
           data,
           header: {
-            'content-type': contentType
+            'content-type': contentType,
+            'Authorization': token || ''
           }
         })
         Taro.hideNavigationBarLoading()
@@ -48,3 +50,7 @@ export default class Http {
     })
   }
 }
+
+const http = new Http();
+
+export default http
