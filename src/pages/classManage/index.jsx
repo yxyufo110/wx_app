@@ -61,6 +61,13 @@ export default class Index extends Component {
 
   addCourse = () => {
     const { cname,selectorChecked } = this.state
+    if(!cname || !selectorChecked.id) {
+      return Taro.showToast({
+        title: '请输入完整信息',
+        icon: 'none',
+        duration: 2000
+      })
+    }
     api.addCourse({
       name: cname,
       cid: selectorChecked.id
