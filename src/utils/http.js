@@ -39,13 +39,31 @@ const contentType = 'application/json'
         Taro.hideNavigationBarLoading()
         switch (res.statusCode) {
           case 200:
+            if(!res.data.flag && res.data.code === 40001) {
+              Taro.removeStorageSync('token')
+              return Taro.redirectTo({
+                url: '/pages/login/index'
+              })
+            }
+            if(!res.data.flag) {
+              return Taro.showToast({
+                title: res.data.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
             return resolve(res.data)
           default:
             reject(new Error(res.data.msg))
         }
       } catch (error) {
         Taro.hideNavigationBarLoading()
-        reject(new Error('网络请求出错'))
+        return Taro.showToast({
+          title: '网络请求出错',
+          icon: 'none',
+          duration: 2000
+        })
+        // reject(new Error('网络请求出错'))
       }
     })
   }

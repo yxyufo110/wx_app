@@ -1,3 +1,3 @@
-const baseUrl = 'http://1897g0z001.imwork.net:35588'
+const baseUrl = 'http://132.232.47.59:9012'
 
 export default { baseUrl }

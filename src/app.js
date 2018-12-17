@@ -1,21 +1,23 @@
 import Taro, { Component } from '@tarojs/taro'
 import '@tarojs/async-await'
 import Index from './pages/index'
-
 import './app.less'
 
 class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/login/index',
+      'pages/joinUs/index',
+      'pages/classManage/index',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#13BF79',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
-    }
+    },
   }
 
   componentDidMount () {}
