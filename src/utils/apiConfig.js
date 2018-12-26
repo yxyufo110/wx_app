@@ -1,4 +1,3 @@
-const baseUrl = 'https://tcb-api.tencentcloudapi.com'
-const basic = 'basic 123444444444444'
+const baseUrl = 'http://132.232.47.59:9012'
 
-export default { baseUrl, basic }
+export default { baseUrl }

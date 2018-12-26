@@ -2,11 +2,9 @@ import Taro from '@tarojs/taro'
 import apiConfig from './apiConfig'
 
 
-// 后端是否支持json格式
-// const contentType = 'application/x-www-form-urlencoded'
 const contentType = 'application/json'
 
-export default class Http {
+ class Http {
 
   get(url, data) {
     return this.commonHttp('GET', url, data)
@@ -27,26 +25,50 @@ export default class Http {
   async commonHttp(method, url, data) {
     return new Promise(async (resolve, reject) => {
       Taro.showNavigationBarLoading()
+      const token = Taro.getStorageSync('token')
       try {
         const res = await Taro.request({
           url: `${apiConfig.baseUrl}${url}`,
           method,
           data,
           header: {
-            'content-type': contentType
+            'content-type': contentType,
+            'Authorization': token || ''
           }
         })
         Taro.hideNavigationBarLoading()
         switch (res.statusCode) {
           case 200:
-            return resolve(res.data.response)
+            if(!res.data.flag && res.data.code === 40001) {
+              Taro.removeStorageSync('token')
+              return Taro.redirectTo({
+                url: '/pages/login/index'
+              })
+            }
+            if(!res.data.flag) {
+              return Taro.showToast({
+                title: res.data.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
+            return resolve(res.data)
           default:
             reject(new Error(res.data.msg))
         }
       } catch (error) {
         Taro.hideNavigationBarLoading()
-        reject(new Error('网络请求出错'))
+        return Taro.showToast({
+          title: '网络请求出错',
+          icon: 'none',
+          duration: 2000
+        })
+        // reject(new Error('网络请求出错'))
       }
     })
   }
 }
+
+const http = new Http();
+
+export default http
