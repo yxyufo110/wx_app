@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Button,Picker } from '@tarojs/components'
-import { AtSearchBar, AtIcon, AtModal, AtModalHeader, AtModalContent, AtModalAction, AtInput } from 'taro-ui'
-import api from '../../services/classManager'
+import { View, Text, } from '@tarojs/components'
+import { AtSearchBar, AtIcon, } from 'taro-ui'
+// import api from '../../services/classManager'
 import './index.less'
 
 export default class Index extends Component {
@@ -9,10 +9,6 @@ export default class Index extends Component {
     super(...arguments)
     this.state = {
       searchVal: '',
-      showModal: false,
-      cname: '',
-      selector: [],
-      selectorChecked: ''
     }
   }
 
@@ -22,11 +18,11 @@ export default class Index extends Component {
 
 
   componentWillMount() {
-    api.getAllCourse().then(res=> {
-      this.setState({
-        selector:res.data
-      })
-    })
+    // api.getAllCourse().then(res=> {
+    //   this.setState({
+    //     selector:res.data
+    //   })
+    // })
   }
 
   componentDidMount() { }
@@ -42,46 +38,51 @@ export default class Index extends Component {
       searchVal: e
     })
   }
-  pressModal = () => {
-    this.setState({
-      showModal: !this.state.showModal
-    })
-  }
+  // pressModal = () => {
+  //   this.setState({
+  //     showModal: !this.state.showModal
+  //   })
+  // }
 
-  changeInput = (k, v) => {
-    this.setState({
-      [k]: v
-    })
-  }
-  changeClass = (e) => {
-    this.setState({
-      selectorChecked: this.state.selector[e.detail.value]
-    })
-  }
+  // changeInput = (k, v) => {
+  //   this.setState({
+  //     [k]: v
+  //   })
+  // }
+  // changeClass = (e) => {
+  //   this.setState({
+  //     selectorChecked: this.state.selector[e.detail.value]
+  //   })
+  // }
 
-  addCourse = () => {
-    const { cname,selectorChecked } = this.state
-    if(!cname || !selectorChecked.id) {
-      return Taro.showToast({
-        title: '请输入完整信息',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-    api.addCourse({
-      name: cname,
-      cid: selectorChecked.id
-    }).then(() => {
-      this.pressModal()
-      Taro.showToast({
-        title: '添加成功',
-        icon: 'success',
-        duration: 2000
-      })
+  // addCourse = () => {
+  //   const { cname,selectorChecked } = this.state
+  //   if(!cname || !selectorChecked.id) {
+  //     return Taro.showToast({
+  //       title: '请输入完整信息',
+  //       icon: 'none',
+  //       duration: 2000
+  //     })
+  //   }
+  //   api.addCourse({
+  //     name: cname,
+  //     cid: selectorChecked.id
+  //   }).then(() => {
+  //     this.pressModal()
+  //     Taro.showToast({
+  //       title: '添加成功',
+  //       icon: 'success',
+  //       duration: 2000
+  //     })
+  //   })
+  // }
+  addClass = () => {
+    Taro.navigateTo({
+      url: '/pages/addClass/index'
     })
   }
   render() {
-    const { searchVal, showModal, cname, selectorChecked } = this.state
+    const { searchVal, } = this.state
     return (
       <View className='classManage'>
         <AtSearchBar
@@ -89,8 +90,8 @@ export default class Index extends Component {
           onChange={this.changeSearch}
           placeholder='搜索班级'
         />
-        <View className='add-box' onClick={this.pressModal}>
-          <View className='add-btn'>
+        <View className='add-box'>
+          <View className='add-btn' onClick={this.addClass}>
             <AtIcon value='add' size='14' color='#ffffff'></AtIcon>&nbsp;&nbsp;添加班级</View>
         </View>
         <View className='cell'>
@@ -102,7 +103,7 @@ export default class Index extends Component {
           </View>
         </View>
         {/* 弹穿 */}
-        <AtModal isOpened={showModal}>
+        {/* <AtModal isOpened={showModal}>
           <AtModalHeader>添加班级</AtModalHeader>
           <AtModalContent>
           <AtInput
@@ -122,7 +123,7 @@ export default class Index extends Component {
             </View>
           </AtModalContent>
           <AtModalAction> <Button style={{color:'#13BF79'}} onClick={this.addCourse}>确认</Button> <Button onClick={this.pressModal}>返回</Button></AtModalAction>
-        </AtModal>
+        </AtModal> */}
       </View>
     )
   }
