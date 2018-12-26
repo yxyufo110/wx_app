@@ -33,7 +33,6 @@
     "@tarojs/plugin-babel": "^1.1.9",
     "@tarojs/plugin-csso": "^1.1.9",
     "@tarojs/plugin-less": "^1.1.9",
-    "@tarojs/plugin-sass": "^1.2.0-beta.15",
     "@tarojs/plugin-uglifyjs": "^1.1.9",
     "@tarojs/webpack-runner": "^1.1.9",
     "@types/react": "^16.4.6",
